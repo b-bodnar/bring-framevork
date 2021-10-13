@@ -1,7 +1,7 @@
 ---
 name: Issue template
 about: Describe this issue template's purpose here.
-title: H-{IssueNumber}:{IssueDescription}
+title: H-IssueNumber:IssueDescription
 labels: ''
 assignees: ''
 
