@@ -24,17 +24,20 @@ public class BringFramework {
   }
 
   /**
-   * Start application
    *
-   * @param mainClass
-   * @throws IOException
-   * @throws ClassNotFoundException
+   * @param mainClass - main class of the application that will be initialized by framework
+   * @return
+   * @throws InvocationTargetException
+   * @throws NoSuchMethodException
+   * @throws InstantiationException
+   * @throws IllegalAccessException
    */
-  public static void startApp(Class<?> mainClass) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+  public static Map<Class<?>, Object> startApp(Class<?> mainClass) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
     if (diContainer == null) {
       diContainer = new BringFramework();
       diContainer.initializeFramework(mainClass);
     }
+    return diContainer.appContext;
   }
 
   /**
@@ -84,7 +87,7 @@ public class BringFramework {
   }
 
   @SuppressWarnings("unchecked")
-  public <T> T getBeanInstance(Class<T> interfaceClass) throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+  private  <T> T getBeanInstance(Class<T> interfaceClass) throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
     return (T) getBeanInstance(interfaceClass, null, null);
   }
 
@@ -108,7 +111,7 @@ public class BringFramework {
       Optional<Map.Entry<Class<?>, Class<?>>> optional = implementationClasses.stream().findFirst();
       return optional.get().getKey();
     } else {
-      String findBy = (qualifier.isEmpty()) ? fieldName : qualifier;
+      String findBy = (qualifier != null && qualifier.isEmpty()) ? fieldName : qualifier;
       Optional<Map.Entry<Class<?>, Class<?>>> optional = implementationClasses.stream()
           .filter(entry -> entry.getKey().getSimpleName().equalsIgnoreCase(findBy)).findAny();
       if (optional.isPresent()) {
