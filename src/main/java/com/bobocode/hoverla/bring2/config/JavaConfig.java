@@ -9,9 +9,12 @@ public class JavaConfig implements Config {
 
     @Getter
     private Reflections scanner;
+    @Getter
+    private String basePackageToScan;
 
     public JavaConfig(String packageToScan) {
-        this.scanner = new Reflections(packageToScan);
+        this.basePackageToScan = packageToScan;
+        this.scanner = new Reflections(basePackageToScan);
     }
 
     @Override

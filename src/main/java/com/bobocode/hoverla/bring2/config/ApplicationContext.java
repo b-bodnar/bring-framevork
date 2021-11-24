@@ -9,10 +9,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ApplicationContext {
     @Setter
-    private ObjectFactory factory;
+    private BeanFactory factory;
     private Map<Class,Object> cache = new ConcurrentHashMap<>();
     @Getter
     private Config config;
+    private String basePackageToScan;
 
     public ApplicationContext(Config config) {
         this.config = config;

@@ -6,4 +6,6 @@ public interface Config {
     <T> Class<? extends T> getImplClassBy(Class<T> ifc, String value);
 
     Reflections getScanner();
+
+    String getBasePackageToScan();
 }
