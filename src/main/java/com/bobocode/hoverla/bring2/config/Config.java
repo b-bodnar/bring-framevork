@@ -4,6 +4,5 @@ import org.reflections.Reflections;
 
 public interface Config {
     <T> Class<? extends T> getImplClassBy(Class<T> ifc, String value);
-
     Reflections getScanner();
 }

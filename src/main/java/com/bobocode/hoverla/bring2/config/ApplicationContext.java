@@ -1,6 +1,6 @@
 package com.bobocode.hoverla.bring2.config;
 
-import com.bobocode.hoverla.bring2.annotations.Autowired;
+import com.bobocode.hoverla.bring2.annotations.Bean;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,14 +24,13 @@ public class ApplicationContext {
         }
 
         Class<? extends T>  implClass = type;
-
         if (type.isInterface()){
             implClass = config.getImplClassBy(type, "");
         }
 
         T t = factory.createObject(implClass);
 
-        if (implClass.isAnnotationPresent(Autowired.class)){
+        if (implClass.isAnnotationPresent(Bean.class)){
             cache.put(type, implClass);
         }
 
