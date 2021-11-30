@@ -43,6 +43,8 @@ public class ApplicationContext {
             implClass = config.getImplClassBy(type,value);
         }
 
+        System.out.println("implClass " + implClass);
+
         T t = factory.createObject(implClass);
         return t;
     }
