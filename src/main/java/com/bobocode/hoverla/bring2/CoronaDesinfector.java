@@ -9,7 +9,7 @@ public class CoronaDesinfector {
     private Announcer announcer ;
 
     @Autowired
-    @Qualifier("SimplePolicemanImpl") //AngryPolicemanImpl  SimplePolicemanImpl
+    @Qualifier("AngryPolicemanImpl") //AngryPolicemanImpl  SimplePolicemanImpl
     private Policeman policeman ;
 
     public void start(Room room){

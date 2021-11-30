@@ -23,14 +23,14 @@ public class JavaConfig implements Config {
         Set<Class<? extends T>> classes = scanner.getSubTypesOf(ifc);
         Class<? extends T> result = classes.iterator().next();
 
+        if (!qualifier.isEmpty()){
+            putQualifierImplToCache(ifc, qualifier, classes);
+        }
+
         if (qualifierCache.containsKey(ifc)){
             for (Map.Entry<Class, Class> classClassEntry : qualifierCache.entrySet()) {
                 result = classClassEntry.getValue();
             }
-        }
-
-        if (!qualifier.isEmpty()){
-            putQualifierImplToCache(ifc, qualifier, classes);
         }
 
         return result;
