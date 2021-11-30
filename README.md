@@ -10,7 +10,6 @@ Describes what problems can be faced and how to solve them
 Can be found in [RELEASE_NOTES](RELEASE_NOTES.md).
 
 ## Authors
-* Rostyslav Kholodnytskyi  - [rstkhldntsk97](https://github.com/rstkhldntsk97)
 * Maryna Melnychuk - [marynamelnichuk](https://github.com/marynamelnichuk)
 * Rostyslav Sapeliuk - [rsapeliuk](https://github.com/rsapeliuk)
 * Serhii Halchynskyi - [imptah](https://github.com/imptah)
