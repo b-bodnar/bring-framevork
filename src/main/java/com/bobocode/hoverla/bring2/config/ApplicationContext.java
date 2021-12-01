@@ -1,6 +1,7 @@
 package com.bobocode.hoverla.bring2.config;
 
 import com.bobocode.hoverla.bring2.annotations.Bean;
+import com.bobocode.hoverla.bring2.exceptions.MultipleBeanImplementationsException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,10 +38,15 @@ public class ApplicationContext {
         return t;
     }
 
-    public <T> T getObjectByQualifier(Class<T> type, String value) {
+    public <T> T getObjectByQualifier(Class<T> type, String qualifier) {
         Class<? extends T>  implClass = type;
+
+        if (qualifier.isEmpty()){
+            throw new MultipleBeanImplementationsException( type + " has more than one implementation. Please use @Qualifier annotation to specify which implementation you want to use.");
+        }
+
         if (type.isInterface()){
-            implClass = config.getImplClassBy(type,value);
+            implClass = config.getImplClassBy(type,qualifier);
         }
 
         T t = factory.createObject(implClass);

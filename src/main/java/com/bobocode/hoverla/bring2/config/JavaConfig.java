@@ -1,10 +1,13 @@
 package com.bobocode.hoverla.bring2.config;
 
 
+import com.bobocode.hoverla.bring2.exceptions.BeanImplementationNotFoundException;
+import com.bobocode.hoverla.bring2.exceptions.MultipleBeanImplementationsException;
 import lombok.Getter;
 import org.reflections.Reflections;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -21,16 +24,21 @@ public class JavaConfig implements Config {
     @Override
     public <T> Class<? extends T> getImplClassBy(Class<T> ifc, String qualifier) {
         Set<Class<? extends T>> classes = scanner.getSubTypesOf(ifc);
+
+        if (classes.isEmpty()){
+            throw new BeanImplementationNotFoundException("Can't create context." + ifc + " have no implementations.");
+        }
+
         Class<? extends T> result = classes.iterator().next();
+
+        if (!qualifier.isEmpty()){
+            putQualifierImplToCache(ifc, qualifier, classes);
+        }
 
         if (qualifierCache.containsKey(ifc)){
             for (Map.Entry<Class, Class> classClassEntry : qualifierCache.entrySet()) {
                 result = classClassEntry.getValue();
             }
-        }
-
-        if (!qualifier.isEmpty()){
-            putQualifierImplToCache(ifc, qualifier, classes);
         }
 
         return result;
