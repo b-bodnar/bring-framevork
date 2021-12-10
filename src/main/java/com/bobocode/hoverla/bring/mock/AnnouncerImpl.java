@@ -1,9 +1,9 @@
 package com.bobocode.hoverla.bring.mock;
 
 import com.bobocode.hoverla.bring.annotations.Autowired;
-import com.bobocode.hoverla.bring.annotations.Bean;
+import com.bobocode.hoverla.bring.annotations.Component;
 
-@Bean
+@Component
 public class AnnouncerImpl implements Announcer {
 
     @Autowired
@@ -12,5 +12,6 @@ public class AnnouncerImpl implements Announcer {
     @Override
     public void announce(String text) {
         recommendator.recommend();
+        System.out.println(text);
     }
 }

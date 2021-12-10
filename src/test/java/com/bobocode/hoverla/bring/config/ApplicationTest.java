@@ -11,7 +11,7 @@ public class ApplicationTest  {
 
     @BeforeEach
     public void setUp() throws Exception {
-        context = Application.run("com.bobocode.hoverla.bring2");
+        context = Application.run("com.bobocode.hoverla.bring");
     }
 
     @Test
