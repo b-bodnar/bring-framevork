@@ -13,9 +13,12 @@ public class BeanSearchConfigImpl implements BeanSearchConfig {
 
     @Getter
     private final Reflections scanner;
+    @Getter
+    private final Reflections configScanner;
 
     public BeanSearchConfigImpl(String packageToScan) {
         this.scanner = new Reflections(packageToScan);
+        this.configScanner = new Reflections("com.bobocode.hoverla.bring");
     }
 
     @Override

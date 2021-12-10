@@ -34,11 +34,8 @@ public class ApplicationContext {
             return getObjectFromCache(type, qualifier);
         }
 
-        if (type.isInterface()) {
-            return getObjectFromInterface(type, qualifier);
-        } else {
-            return getObjectFromClass(type);
-        }
+        return type.isInterface() ?
+            getObjectFromInterface(type, qualifier) : getObjectFromClass(type);
     }
 
     private <T> T getObjectFromCache(Class<T> type, String qualifier) {
@@ -57,11 +54,9 @@ public class ApplicationContext {
     private <T> T getObjectFromInterface(Class<T> type, String qualifier) {
         System.out.println(type);
         List<Class<? extends T>> implClasses = beanSearchConfig.getImplClassBy(type);
-        if (implClasses.size() > 1) {
-            return getObjectFromInterfaceWithMultipleImpls(type, qualifier, implClasses);
-        } else {
-            return getObjectFromInterfaceWithSingleImpl(type, implClasses);
-        }
+        return implClasses.size() > 1 ?
+            getObjectFromInterfaceWithMultipleImpls(type, qualifier, implClasses)
+            : getObjectFromInterfaceWithSingleImpl(type, implClasses);
     }
 
     private <T> T getObjectFromInterfaceWithSingleImpl(Class<T> type, List<Class<? extends T>> implClasses) {

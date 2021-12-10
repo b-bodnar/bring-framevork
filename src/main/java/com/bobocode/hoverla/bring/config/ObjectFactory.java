@@ -17,7 +17,7 @@ public class ObjectFactory   {
     @SneakyThrows
     public ObjectFactory(ApplicationContext context) {
         this.context = context;
-        for (Class<? extends BeanPostProcessor> aClass : context.getBeanSearchConfig().getScanner().getSubTypesOf(BeanPostProcessor.class)) {
+        for (Class<? extends BeanPostProcessor> aClass : context.getBeanSearchConfig().getConfigScanner().getSubTypesOf(BeanPostProcessor.class)) {
             configurators.add(aClass.getDeclaredConstructor().newInstance());
         }
     }
