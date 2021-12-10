@@ -25,7 +25,7 @@ public class BeanSearchConfigImpl implements BeanSearchConfig {
     public <T> List<Class<? extends T>> getImplClassBy(Class<T> ifc) {
         Set<Class<? extends T>> classes = scanner.getSubTypesOf(ifc);
         if (classes.size() == 0) {
-            throw new NoSuchImplementationException(ifc + "has no implementation");
+            throw new NoSuchImplementationException(ifc + " has no implementation");
         }
         return new ArrayList<>(classes);
     }

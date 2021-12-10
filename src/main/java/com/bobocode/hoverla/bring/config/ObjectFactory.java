@@ -1,6 +1,7 @@
 package com.bobocode.hoverla.bring.config;
 
 import com.bobocode.hoverla.bring.beanPostProcessor.BeanPostProcessor;
+import com.bobocode.hoverla.bring.exception.ConstructorInjectionNotSupportedException;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.Constructor;
@@ -24,18 +25,12 @@ public class ObjectFactory   {
 
     @SneakyThrows
     public <T> T createObject(Class<T> implClass){
-//        Constructor<?>[] declaredConstructors = implClass.getDeclaredConstructors();
-//        for (Constructor<?> declaredConstructor : declaredConstructors) {
-//            System.out.println(Arrays.toString(declaredConstructor.getParameters()));
-//        }
-//        Parameter[] parameters = implClass.getDeclaredConstructor().getParameters();
-//        int length = implClass.getDeclaredConstructors().length;
+
         if (implClass.getDeclaredConstructors().length > 1 || implClass.getDeclaredConstructors()[0].getParameters().length > 0) {
-            throw new IllegalArgumentException("Please use field injection with @Autowired annotation. Constructor injection is not supported for now. Will be made in the future ;)");
+            throw new ConstructorInjectionNotSupportedException("Please use field injection with @Autowired annotation. Constructor injection is not supported for now. Will be made in the future ;)");
         }
         T t = implClass.getDeclaredConstructor().newInstance();
 
-        //chain of responsibility
         configurators.forEach(beanPostProcessor -> beanPostProcessor.configure(t,context));
 
         return t;

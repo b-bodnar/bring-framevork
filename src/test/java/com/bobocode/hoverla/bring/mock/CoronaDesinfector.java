@@ -10,9 +10,8 @@ public class CoronaDesinfector {
     @Qualifier("AngryPolicemanImpl") //AngryPolicemanImpl  SimplePolicemanImpl
     private Policeman angryPoliceman;
 
-    @Autowired
-    @Qualifier("SimplePolicemanImpl") //AngryPolicemanImpl  SimplePolicemanImpl
-    private Policeman policeman;
+//    @Autowired
+//    private Policeman policeman;
 
     @Autowired
     private Announcer announcer;
@@ -27,7 +26,7 @@ public class CoronaDesinfector {
     public void start(Room room) {
         announcer.announce("CoronaDesinfector class method start");
         announcer2.announce("O KURWA 2 ANNOUNCERA TUT YOOOOOOY!");
-        policeman.saySomethings();
+//        policeman.saySomethings();
         angryPoliceman.saySomethings();
         desinfect(room);
         announcer.announce("CoronaDesinfector class method exit");

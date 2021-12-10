@@ -29,7 +29,6 @@ public class ApplicationContext {
     }
 
     public <T> T getObject(Class<T> type, String qualifier) {
-        System.out.println(cache);
         if (cache.containsKey(type)) {
             return getObjectFromCache(type, qualifier);
         }
@@ -40,7 +39,11 @@ public class ApplicationContext {
 
     private <T> T getObjectFromCache(Class<T> type, String qualifier) {
         Collection<Object> objects = cache.get(type);
-        if (objects.size() >= 1 || !qualifier.isBlank()) {
+        List<String> classNames = objects.stream().map(Object::getClass).map(Class::getSimpleName).collect(Collectors.toList());
+        if (objects.size() > 1) {
+            if(qualifier.isBlank()){
+               throw new NoSuchImplementationException(type.getSimpleName() + " interface has multiple implementations, please specify the qualifier. Available implementations: " + classNames);
+            }
             for (Object object : objects) {
                 if (qualifier.equals(object.getClass().getSimpleName())) {
                     return (T) object;
@@ -52,7 +55,6 @@ public class ApplicationContext {
     }
 
     private <T> T getObjectFromInterface(Class<T> type, String qualifier) {
-        System.out.println(type);
         List<Class<? extends T>> implClasses = beanSearchConfig.getImplClassBy(type);
         return implClasses.size() > 1 ?
             getObjectFromInterfaceWithMultipleImpls(type, qualifier, implClasses)
@@ -82,11 +84,10 @@ public class ApplicationContext {
             .filter(obj -> qualifier.equals(obj.getClass().getSimpleName()))
             .findAny()
             .orElseThrow(() ->
-                new NoSuchImplementationException("This interface has multiple implementations, please specify the qualifier. Available implementations: " + implNames));
+                new NoSuchImplementationException(type.getSimpleName() + " interface has multiple implementations, please specify the qualifier. Available implementations: " + implNames));
     }
 
     private <T> T getObjectFromClass(Class<T> type) {
-        System.out.println(type);
         T t = factory.createObject((Class<? extends T>) type);
 
         if (type.isAnnotationPresent(Component.class)) {

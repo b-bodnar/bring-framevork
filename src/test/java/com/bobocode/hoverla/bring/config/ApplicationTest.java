@@ -10,7 +10,7 @@ public class ApplicationTest  {
     private ApplicationContext context;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp(){
         context = Application.run("com.bobocode.hoverla.bring");
     }
 
