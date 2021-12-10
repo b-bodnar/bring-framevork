@@ -49,10 +49,9 @@ public class ApplicationContext {
                     return (T) object;
                 }
             }
-        }else {
-            return (T) new ArrayList<>(objects).get(0);
         }
-        return null;
+        return (T) new ArrayList<>(objects).get(0);
+
     }
 
     private <T> T getObjectFromInterface(Class<T> type, String qualifier) {
