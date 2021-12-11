@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ObjectFactoryTest {
 
-    private ApplicationContext context = Application.run("com.bobocode.hoverla.bring2");;
+    private ApplicationContext context = Application.run("com.bobocode.hoverla.bring");;
     private List<BeanPostProcessor> configurators = new ArrayList<>();
     private ObjectFactory factory =  new ObjectFactory(context);
 

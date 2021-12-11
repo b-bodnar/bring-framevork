@@ -1,8 +1,8 @@
 package com.bobocode.hoverla.bring.mock;
 
-import com.bobocode.hoverla.bring.annotations.Bean;
+import com.bobocode.hoverla.bring.annotations.Component;
 
-@Bean
+@Component
 public class AngryPolicemanImpl implements Policeman {
 
     @Override

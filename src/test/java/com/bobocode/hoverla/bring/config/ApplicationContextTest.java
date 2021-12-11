@@ -26,7 +26,7 @@ class ApplicationContextTest {
 
     @Test
     void testGetAngryPolicemanImplByQualifier() {
-        var actual = context.getObjectByQualifier(Policeman.class,"AngryPolicemanImpl");
+        var actual = context.getObject(Policeman.class,"AngryPolicemanImpl");
         var expect = "com.bobocode.hoverla.bring.mock.AngryPolicemanImpl";
 
         assertEquals(actual.getClass().getName(),expect);
@@ -34,7 +34,7 @@ class ApplicationContextTest {
 
     @Test
     void testGetSimplePolicemanImplByQualifier() {
-        var actual = context.getObjectByQualifier(Policeman.class,"SimplePolicemanImpl");
+        var actual = context.getObject(Policeman.class,"SimplePolicemanImpl");
         var expect = "com.bobocode.hoverla.bring.mock.SimplePolicemanImpl";
 
         assertEquals(actual.getClass().getName(),expect);
