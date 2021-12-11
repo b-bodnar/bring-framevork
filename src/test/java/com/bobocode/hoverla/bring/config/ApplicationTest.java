@@ -9,13 +9,10 @@ public class ApplicationTest  {
 
     private ApplicationContext context;
 
-    @BeforeEach
-    public void setUp(){
-        context = Application.run("com.bobocode.hoverla.bring");
-    }
-
     @Test
     public void testContextIsNotNull() {
+        context = Application.run("com.bobocode.hoverla.bring");
+        System.out.println(context);
         assertNotNull(context);
     }
 }
