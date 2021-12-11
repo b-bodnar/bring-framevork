@@ -18,7 +18,7 @@ Second, add dependency of our project:
     <dependency>
         <groupId>com.github.b-bodnar</groupId>
         <artifactId>bring-framevork</artifactId>
-        <version>2e133860b0f2c68995420dbcdf766260d54367b8</version>
+        <version>e3789616df735b52992dcc236b23cad9a744da28</version>
     </dependency>
 
 Third, add these lines in your main class to get application context:
